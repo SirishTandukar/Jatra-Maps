@@ -1,19 +1,30 @@
 const express = require("express");
-const User = require("../models/user.model.js");
 const router = express.Router();
-const {getUsers, createUser} = require('../controllers/user.controller.js');
+const {
+  registerUser,
+  authUser,
+  allUsers,
+  getAllNotification,
+  deleteNotification,
+  getAllUsers,
+} = require("../controllers/user.controller");
 
-console.log("hello")    
-router.get('/', getUsers);
-// router.get("/:id", getProduct);
+// User registration
+router.post("/register", registerUser);
 
-router.post("/", createUser);
+// User login
+router.post("/login", authUser);
 
-// update a product
-// router.put("/:id", updateProduct);
+// Get all users
+router.get("/users", allUsers);
 
-// delete a product
-// router.delete("/:id", deleteProduct);
+// Get all users (alternative)
+router.get("/all-users", getAllUsers);
 
+// Mark all notifications as read
+router.post("/notifications/read", getAllNotification);
+
+// Delete all notifications
+router.delete("/notifications", deleteNotification);
 
 module.exports = router;
